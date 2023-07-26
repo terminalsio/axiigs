@@ -1,18 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function () {
     return view('landing');
+});
+
+Route::get('/gs', function () {
+    return Socialite::driver('google')->redirect();
+});
+
+Route::get('/gs/callback', function () {
+    $user = Socialite::driver('google')->user();
+
+    dd($user);
 });
