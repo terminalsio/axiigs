@@ -8,7 +8,11 @@ Route::get('/', function () {
 });
 
 Route::get('/gs', function () {
-    return Socialite::driver('google')->redirect();
+    return Socialite::driver('google')
+        ->scopes([
+            \Google\Service\Sheets::DRIVE,
+            \Google\Service\Sheets::SPREADSHEETS
+        ])->redirect();
 });
 
 Route::get('/gs/callback', function () {
